@@ -1,7 +1,7 @@
 
 INFO:
 
-- Bu bir frontend proyektidir. html, css (tailwind framework) ve javascript istifadə olunur.
+- Bu bir frontend proyektidir. html, css (tailwind framework) ve javascript istifade olunur.
 
 
 =================================================
@@ -11,9 +11,8 @@ EDILECEKLER:
 - hansi task hansi tarixde elave edilibse gorunsun
 - "completed" ve "incompleted"-den elave tarixe ve kateqoriyaya gore de filterlemek olsun
 - azece ve ya basanda dili ceviren buton olsun
-- tab icon
-- darkmode
-- hamsini sil
+- darkmode da olsun butonla
+- hamsini silmek olsun
 - login + database
 
 
