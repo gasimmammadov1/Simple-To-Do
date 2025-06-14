@@ -11,7 +11,7 @@ EDILECEKLER:
 - sorus gor hansi dilde yazib
 - githuba at ve ordan da netlify'a
 
-- sozler ing dilinde et (yaxud azece, ve ya basanda dili ceviren buton olsun)
+- azece ve ya basanda dili ceviren buton olsun
 - tab icon
 - darkmode
 - hamsini sil
