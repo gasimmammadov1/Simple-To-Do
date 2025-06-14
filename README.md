@@ -14,6 +14,7 @@ EDILECEKLER:
 - azece ve ya basanda dili ceviren buton olsun
 - darkmode da olsun butonla
 - hamsini silmek olsun
+- footerde github reposuna link
 - login + database
 
 
