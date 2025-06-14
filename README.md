@@ -2,6 +2,7 @@
 INFO:
 
 - Bu bir frontend proyektidir. html, css (tailwind framework) ve javascript istifade olunur.
+
 https://gasim-to-do.netlify.app/
 
 =================================================
