@@ -134,7 +134,7 @@
             bottomRow.className = "text-sm text-gray-600 flex justify-between";
             bottomRow.innerHTML = `📅 ${
               todo.date || "Date not added"
-            } &nbsp; | &nbsp; 🏷️ ${todo.category}`;
+            } &nbsp; | &nbsp; 🏷️ ${todo.category || "Category not added"}`;
 
             if (
               todo.date &&
