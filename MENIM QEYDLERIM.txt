@@ -1,21 +1,21 @@
 
 INFO:
 
-- Bu bir frontend proyektidir.
+- Bu bir frontend proyektidir. html, css (tailwind framework) ve javascript istifadə olunur.
 
 
 =================================================
 
 EDILECEKLER:
 
-- sorus gor hansi dilde yazib
-- githuba at ve ordan da netlify'a
-
+- hansi task hansi tarixde elave edilibse gorunsun
+- "completed" ve "incompleted"-den elave tarixe ve kateqoriyaya gore de filterlemek olsun
 - azece ve ya basanda dili ceviren buton olsun
 - tab icon
 - darkmode
 - hamsini sil
 - login + database
+
 
 - cursor ve windsurf yoxla
 - codex (open.ai)
@@ -27,3 +27,7 @@ git init
 git add .
 git commit -m "commit"
 git push -u origin main
+
+================================================
+
+copilot : CTRL + ALT + I
