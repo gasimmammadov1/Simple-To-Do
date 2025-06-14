@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Görev Listesi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-6">
+    <h1 class="text-2xl font-bold mb-4 text-center">📝 Görev Listesi</h1>
+
+    <form id="todo-form" class="flex flex-col gap-2 mb-4">
+      <div class="flex gap-2">
+        <input id="todo-input" type="text" placeholder="Yeni görev ekle..." class="flex-1 p-2 border rounded-lg" required>
+        <input id="todo-date" type="date" class="p-2 border rounded-lg">
+      </div>
+      <div class="flex gap-2">
+        <select id="todo-category" class="flex-1 p-2 border rounded-lg">
+          <option value="Genel">Genel</option>
+          <option value="İş">İş</option>
+          <option value="Kişisel">Kişisel</option>
+          <option value="Alışveriş">Alışveriş</option>
+        </select>
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Ekle</button>
+      </div>
+    </form>
+
+    <div class="flex justify-between mb-2">
+      <button onclick="filterTodos('all')" class="text-sm text-blue-600">Tümü</button>
+      <button onclick="filterTodos('completed')" class="text-sm text-green-600">Tamamlanan</button>
+      <button onclick="filterTodos('incomplete')" class="text-sm text-yellow-600">Yapılacaklar</button>
+    </div>
+
+    <input id="search" type="text" placeholder="Ara..." class="mb-3 p-2 w-full border rounded-lg">
+
+    <ul id="todo-list" class="space-y-2"></ul>
+  </div>
+
+  <script>
+    const todoForm = document.getElementById('todo-form');
+    const todoInput = document.getElementById('todo-input');
+    const todoDate = document.getElementById('todo-date');
+    const todoCategory = document.getElementById('todo-category');
+    const todoList = document.getElementById('todo-list');
+    const searchInput = document.getElementById('search');
+
+    let todos = JSON.parse(localStorage.getItem('todos')) || [];
+    let currentFilter = 'all';
+
+    function saveTodos() {
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    function renderTodos() {
+      const searchQuery = searchInput.value.toLowerCase();
+      todoList.innerHTML = '';
+      todos
+        .filter(todo => {
+          if (currentFilter === 'completed') return todo.completed;
+          if (currentFilter === 'incomplete') return !todo.completed;
+          return true;
+        })
+        .filter(todo => todo.text.toLowerCase().includes(searchQuery))
+        .forEach((todo, index) => {
+          const li = document.createElement('li');
+          li.className = 'flex flex-col gap-1 bg-gray-50 p-2 rounded-lg shadow-sm';
+
+          const topRow = document.createElement('div');
+          topRow.className = 'flex justify-between items-center';
+
+          const label = document.createElement('label');
+          label.className = 'flex items-center gap-2';
+
+          const checkbox = document.createElement('input');
+          checkbox.type = 'checkbox';
+          checkbox.checked = todo.completed;
+          checkbox.className = 'w-4 h-4';
+          checkbox.onchange = () => {
+            todos[index].completed = checkbox.checked;
+            saveTodos();
+            renderTodos();
+          };
+
+          const span = document.createElement('span');
+          span.textContent = todo.text;
+          span.className = checkbox.checked ? 'line-through text-gray-500' : '';
+
+          const button = document.createElement('button');
+          button.textContent = '❌';
+          button.className = 'text-red-500 hover:text-red-700';
+          button.onclick = () => {
+            todos.splice(index, 1);
+            saveTodos();
+            renderTodos();
+          };
+
+          label.appendChild(checkbox);
+          label.appendChild(span);
+          topRow.appendChild(label);
+          topRow.appendChild(button);
+
+          const bottomRow = document.createElement('div');
+          bottomRow.className = 'text-sm text-gray-600 flex justify-between';
+          bottomRow.innerHTML = `📅 ${todo.date || 'Tarih yok'} &nbsp; | &nbsp; 🏷️ ${todo.category}`;
+
+          if (todo.date && new Date(todo.date) < new Date() && !todo.completed) {
+            bottomRow.classList.add('text-red-500');
+          }
+
+          li.appendChild(topRow);
+          li.appendChild(bottomRow);
+          todoList.appendChild(li);
+        });
+    }
+
+    function filterTodos(type) {
+      currentFilter = type;
+      renderTodos();
+    }
+
+    searchInput.oninput = renderTodos;
+
+    todoForm.onsubmit = (e) => {
+      e.preventDefault();
+      const text = todoInput.value.trim();
+      const date = todoDate.value;
+      const category = todoCategory.value;
+      if (text !== '') {
+        todos.push({ text, completed: false, date, category });
+        saveTodos();
+        renderTodos();
+        todoInput.value = '';
+        todoDate.value = '';
+      }
+    };
+
+    renderTodos();
+  </script>
+</body>
+</html>
