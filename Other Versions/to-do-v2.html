@@ -102,7 +102,7 @@
 
           const bottomRow = document.createElement('div');
           bottomRow.className = 'text-sm text-gray-600 flex justify-between';
-          bottomRow.innerHTML = `📅 ${todo.date || 'Date not added'} &nbsp; | &nbsp; 🏷️ ${todo.category}`;
+          bottomRow.innerHTML = `📅 ${todo.date || 'Date not added'} &nbsp; | &nbsp; 🏷️ ${todo.category || 'Category not added'}`;
 
           if (todo.date && new Date(todo.date) < new Date() && !todo.completed) {
             bottomRow.classList.add('text-red-500');
